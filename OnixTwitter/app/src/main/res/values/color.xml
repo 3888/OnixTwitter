@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="primary_dark" type="color">#7f323c</item>
+    <item name="primary" type="color">#7f323c</item>
+    <item name="color_accent" type="color">#ff81D4FA</item>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="sign_ing_red">#200c09</color>#491716
+    <color name="toolbar_red">#7f323c</color>
+
+    <!--https://www.google.com/design/spec/style/color.html#color-color-palette-->
+
+    <color name="color_amber_A700">#FFAB00</color>
+    <color name="color_black">#000000</color>
+    <color name="color_green_600">#7CB342</color>
+    <color name="color_green_500">#4CAF50</color>
+    <color name="color_grey_600">#757575</color>
+    <color name="color_grey_300">#E0E0E0</color>
+    <color name="color_grey_200">#EEEEEE</color>
+    <color name="color_red_500">#F44336</color>
+    <color name="color_red_900">#B71C1C</color>
+    <color name="color_red_800">#C62828</color>
+    <color name="color_white">#FFFFFF</color>
+
+
+
+</resources>

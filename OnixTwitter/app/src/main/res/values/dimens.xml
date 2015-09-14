@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- For sw320dp devices (e.g. 3-4.5" phones) -->
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="app_horizontal_margin">16dp</dimen>
+    <dimen name="app_vertical_margin">16dp</dimen>
+
+    <!-- App Constants -->
+    <dimen name="app_margin_1">1dp</dimen>
+    <dimen name="app_margin_2">2dp</dimen>
+    <dimen name="app_margin_4">4dp</dimen>
+    <dimen name="app_margin_6">6dp</dimen>
+    <dimen name="app_margin_8">8dp</dimen>
+    <dimen name="app_margin_10">10dp</dimen>
+    <dimen name="app_margin_12">12dp</dimen>
+    <dimen name="app_margin_15">15dp</dimen>
+    <dimen name="app_margin_18">18dp</dimen>
+    <dimen name="app_margin_20">20dp</dimen>
+    <dimen name="app_margin_25">25dp</dimen>
+    <dimen name="app_margin_30">30dp</dimen>
+    <dimen name="app_margin_40">40dp</dimen>
+    <dimen name="app_font_size_8">8sp</dimen>
+    <dimen name="app_font_size_10">10sp</dimen>
+    <dimen name="app_font_size_12">12sp</dimen>
+    <dimen name="app_font_size_14">14sp</dimen>
+    <dimen name="app_font_size_16">16sp</dimen>
+    <dimen name="app_font_size_18">18sp</dimen>
+    <dimen name="app_font_size_20">20sp</dimen>
+    <dimen name="app_font_size_22">22sp</dimen>
+    <dimen name="app_font_size_24">24sp</dimen>
+    <dimen name="app_font_size_26">26sp</dimen>
+    <dimen name="app_font_size_28">28sp</dimen>
+    <dimen name="app_font_size_30">30sp</dimen>
+
+    <!-- typical sizes of views -->
+    <dimen name="button_size_tall">60dp</dimen>
+    <dimen name="button_size_normal">40dp</dimen>
+    <dimen name="button_size_short">32dp</dimen>
+
+    <dimen name="drawer_width">240dp</dimen>
+    <dimen name="tweet_height">120dp</dimen>
+
+</resources>

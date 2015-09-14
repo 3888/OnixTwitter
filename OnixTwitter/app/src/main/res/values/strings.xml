@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">OnixTwitter</string>
+
+    <!--Tweet-->
+    <string name="tweet_post_tweet">TWEET</string>
+    <string name="tweet_is_too_long">Tweet is too long</string>
+    <string name="tweet_not_entered">No Tweet Entered</string>
+
+    <!--Toolbar-->
+    <string name="toolbar_tab_name_home">Home</string>
+    <string name="toolbar_tab_name_profile">Profile</string>
+    <string name="toolbar_tab_name_map">Map</string>
+    <string name="toolbar_menu_help">Help</string>
+    <string name="toolbar_menu_logout">Logout</string>
+    <string name="toolbar_menu_skills">My skills</string>
+
+    <!--Drawer-->
+    <string-array name="drawer_array">
+        <item>Help</item>
+        <item>Log out</item>
+        <item>My skills</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!--Profile-->
+    <string name="profile_location">LOCATION:</string>
+    <string name="profile_tweets">TWEETS:</string>
+    <string name="profile_followers">FOLLOWERS:</string>
+    <string name="profile_following">FOLLOWING:</string>
+    <string name="profile_no_location">User hasn\'t set location</string>
+</resources>
