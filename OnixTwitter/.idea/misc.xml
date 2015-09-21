@@ -38,16 +38,13 @@
             <id>Android Lint</id>
           </State>
           <State>
-            <id>Class structure</id>
+            <id>C/C++</id>
           </State>
           <State>
-            <id>Code style issues</id>
+            <id>Data flow analysisC/C++</id>
           </State>
           <State>
-            <id>Control flow issues</id>
-          </State>
-          <State>
-            <id>Data flow issues</id>
+            <id>GPath inspectionsGroovy</id>
           </State>
           <State>
             <id>Google Cloud Endpoints</id>
@@ -56,45 +53,18 @@
             <id>Groovy</id>
           </State>
           <State>
-            <id>Initialization issues</id>
+            <id>Java</id>
           </State>
           <State>
-            <id>Internationalization issues</id>
+            <id>Probable bugsJava</id>
           </State>
           <State>
-            <id>J2ME issues</id>
-          </State>
-          <State>
-            <id>JUnit issues</id>
-          </State>
-          <State>
-            <id>Java language level migration aids</id>
-          </State>
-          <State>
-            <id>Javadoc issues</id>
-          </State>
-          <State>
-            <id>Naming conventions</id>
-          </State>
-          <State>
-            <id>Pattern Validation</id>
-          </State>
-          <State>
-            <id>Probable bugs</id>
-          </State>
-          <State>
-            <id>Probable bugsGroovy</id>
-          </State>
-          <State>
-            <id>RELAX NG</id>
-          </State>
-          <State>
-            <id>Threading issues</id>
+            <id>XML</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>Abstraction issues</id>
+            <id>Android</id>
           </State>
         </selected-state>
       </profile-state>
