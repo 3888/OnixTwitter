@@ -3,6 +3,9 @@ package test.twitter.onix.com.onixtwitter.presenters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import test.twitter.onix.com.onixtwitter.views.TimelineView;
 
@@ -12,6 +15,7 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.twitter.sdk.android.tweetui.FixedTweetTimeline;
+import com.twitter.sdk.android.tweetui.Timeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
 import java.util.List;
@@ -19,16 +23,17 @@ import java.util.List;
 public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTimelinePresenter {
 
     private static final String TAG = HomeTimelinePresenterImpl.class.getSimpleName();
+    private TimelineView mTimelineView;
 
-    private TimelineView timelineView;
+//public static List
 
     public static HomeTimelinePresenterImpl newInstance(@NonNull TimelineView timelineView) {
         return new HomeTimelinePresenterImpl(timelineView);
     }
 
     HomeTimelinePresenterImpl(@NonNull TimelineView timelineView) {
-        Log.d(TAG, "UserTimelinePresenterImpl(@NonNull TimelineView timelineView)");
-        this.timelineView = timelineView;
+        Log.d(TAG, "UserTimelinePresenterImpl(@NonNull TimelineView mTimelineView)");
+        this.mTimelineView = timelineView;
     }
 
     @Override
@@ -51,21 +56,21 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
 
     @NonNull
     private TwitterCallback getTwitterCallback(@NonNull Context context, boolean isUpdate) {
-        return new TwitterCallback(context, isUpdate, timelineView);
+        return new TwitterCallback(context, isUpdate, mTimelineView);
     }
 
     private static final class TwitterCallback extends Callback<List<Tweet>> {
 
         private final String TAG = TwitterCallback.class.getSimpleName();
 
-        private Context context;
+        private Context mContext;
         private boolean isUpdate;
-        private TimelineView timelineView;
+        private TimelineView mTimelineView;
 
         TwitterCallback(Context context, boolean isUpdate, TimelineView timelineView) {
-            this.context = context;
+            this.mContext = context;
             this.isUpdate = isUpdate;
-            this.timelineView = timelineView;
+            this.mTimelineView = timelineView;
         }
 
         @Override
@@ -81,14 +86,20 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
             FixedTweetTimeline fixedTweetTimeline = new FixedTweetTimeline.Builder()
                     .setTweets(tweets)
                     .build();
-            TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(context, fixedTweetTimeline);
+
+            TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(mContext, fixedTweetTimeline);
+
+            for (int i = 0; i <= 9; i++) {
+                adapter.getItemId(i);
+                Log.d(TAG, "*******adapter.getItemId()*******: " +  adapter.getItemId(i));
+            }
 
             if (isUpdate) {
                 Log.d(TAG, "update user tweet list");
-                timelineView.updateUserTweetList(adapter);
+                mTimelineView.updateUserTweetList(adapter);
             } else {
                 Log.d(TAG, "create user tweet list");
-                timelineView.displayUserTweetList(adapter);
+                mTimelineView.displayUserTweetList(adapter);
             }
 
             resetMembers();
@@ -97,13 +108,13 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
         @Override
         public void failure(TwitterException exception) {
             Log.e(TAG, "failure(TwitterException exception)", exception);
-            timelineView.displayError(exception.getMessage());
+            mTimelineView.displayError(exception.getMessage());
             resetMembers();
         }
 
         private void resetMembers() {
-            context = null;
-            timelineView = null;
+            mContext = null;
+            mTimelineView = null;
         }
     }
 }

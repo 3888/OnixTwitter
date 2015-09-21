@@ -35,6 +35,7 @@ import test.twitter.onix.com.onixtwitter.PreferencesHelper;
 import test.twitter.onix.com.onixtwitter.R;
 import test.twitter.onix.com.onixtwitter.callbacks.TweetComposerCallback;
 import test.twitter.onix.com.onixtwitter.fragments.HomeTimelineFragment;
+import test.twitter.onix.com.onixtwitter.fragments.HomeTimelineViewPagerFragment;
 import test.twitter.onix.com.onixtwitter.fragments.ProfileFragment;
 import test.twitter.onix.com.onixtwitter.fragments.SettingsFragment;
 import test.twitter.onix.com.onixtwitter.fragments.TweetComposerFragment;
@@ -52,6 +53,8 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
     private ImageView mDrawerLogo;
     private ImageView mViewPagerIcon;
     private MapFragment mMapFragment;
+
+    private boolean mViewPagerIconSwitcher = true;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -153,7 +156,35 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
         ListView drawerList = (ListView) findViewById(R.id.list_view_drawer);
         String[] drawerMenuItems = getResources().getStringArray(R.array.drawer_array);
         mViewPagerIcon = (ImageView) findViewById(R.id.toolbar_left_icon);
-        showViewPagerIcon();
+        if (!mViewPagerIconSwitcher) {
+            showViewPagerIcon();
+        } else {
+            mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
+        }
+
+        mViewPagerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mViewPagerIconSwitcher) {
+                    Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
+                    showViewPagerIcon();
+                    mViewPagerIconSwitcher = false;
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            HomeTimelineViewPagerFragment.newInstance()).commit();
+
+                } else {
+
+                    Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
+                    mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
+                    mViewPagerIconSwitcher = true;
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            getHomeTimelineFragment()).commit();
+                }
+
+            }
+        });
+
         mDrawerLogo = (ImageView) findViewById(R.id.drawer_list_logo);
         drawerList.setAdapter(new ArrayAdapter<>(this,
                 R.layout.drawer_list_item, drawerMenuItems));
@@ -271,7 +302,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             }
         });
 
-        ImageButton tweetsList = (ImageButton) findViewById(R.id.toolbar_bottom_list);
+        ImageButton tweetsList = (ImageButton) findViewById(R.id.toolbar_bottom_payment);
         tweetsList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

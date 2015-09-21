@@ -24,8 +24,7 @@ public class HomeTimelineFragment extends ListFragment implements TimelineView {
 
     public static HomeTimelineFragment newInstance() {
         Log.d(TAG, "HomeTimelineFragment newInstance()");
-        HomeTimelineFragment fragment = new HomeTimelineFragment();
-        return fragment;
+        return new HomeTimelineFragment();
     }
 
     public HomeTimelineFragment() {
@@ -44,12 +43,6 @@ public class HomeTimelineFragment extends ListFragment implements TimelineView {
 
         View view = inflater.inflate(R.layout.fragment_timeline, container, false);
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated(Bundle savedInstanceState)");
     }
 
     public void onResume() {

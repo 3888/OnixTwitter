@@ -53,7 +53,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/toolbar_bottom_list"
+                android:id="@+id/toolbar_bottom_payment"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/button_size_normal"
                 android:layout_weight="1"

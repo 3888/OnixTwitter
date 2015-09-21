@@ -29,8 +29,8 @@ public class SignInActivity extends AppCompatActivity {
     private PreferencesHelper mSPHelper;
     private TwitterLoginButton mLoginButton;
 
-    private static final String TWITTER_KEY = "GrxnngOM2ohT2ZQ62qmfUGu4n";
-    private static final String TWITTER_SECRET = "9gnNDnKnYm6t7jufvMI5pnJmHZ2YA1mmLebsQYSD1XDvghH7zy";
+    public static final String TWITTER_KEY = "GrxnngOM2ohT2ZQ62qmfUGu4n";
+    public static final String TWITTER_SECRET = "9gnNDnKnYm6t7jufvMI5pnJmHZ2YA1mmLebsQYSD1XDvghH7zy";
 
     private static final String TAG = SignInActivity.class.getSimpleName();
 

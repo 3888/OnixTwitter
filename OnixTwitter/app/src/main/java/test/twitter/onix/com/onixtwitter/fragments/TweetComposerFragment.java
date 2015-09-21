@@ -38,7 +38,7 @@ public class TweetComposerFragment extends Fragment implements TweetComposerView
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate(Bundle savedInstanceState)");
 
-        mTweetComposerPresenter = TweetComposerPresenterImpl.newInstance(this,getActivity());
+        mTweetComposerPresenter = TweetComposerPresenterImpl.newInstance(this, getActivity());
     }
 
     @Override
