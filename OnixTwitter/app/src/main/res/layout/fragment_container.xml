@@ -12,7 +12,7 @@
             android:id="@+id/top_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/toolbar_red">
+            android:background="@color/primary_dark">
 
             <ImageView
                 android:id="@+id/toolbar_left_icon"
@@ -27,7 +27,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/color_white"
                 android:textSize="@dimen/app_font_size_18" />
 
             <ImageView
@@ -59,7 +59,7 @@
             android:id="@+id/panel_bottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_margin_40"
-            android:background="@color/toolbar_red"
+            android:background="@color/primary_dark"
             android:gravity="center"
             android:orientation="horizontal">
 
