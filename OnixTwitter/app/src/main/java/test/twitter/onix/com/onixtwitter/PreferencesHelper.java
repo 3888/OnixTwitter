@@ -7,8 +7,6 @@ public class PreferencesHelper {
     private Context mContext;
     private String APP_SP;
 
-    private static final String TAG = PreferencesHelper.class.getSimpleName();
-
     public PreferencesHelper(Context _context) {
         mContext = _context;
         APP_SP = mContext.getPackageName();

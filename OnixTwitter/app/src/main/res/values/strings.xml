@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">OnixTwitter</string>
 
     <!--Tweet-->
@@ -29,4 +30,5 @@
     <string name="profile_followers">FOLLOWERS:</string>
     <string name="profile_following">FOLLOWING:</string>
     <string name="profile_no_location">User hasn\'t set location</string>
+
 </resources>

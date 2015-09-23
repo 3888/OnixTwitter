@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,12 +31,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.twitter.sdk.android.Twitter;
-
 import test.twitter.onix.com.onixtwitter.PreferencesHelper;
 import test.twitter.onix.com.onixtwitter.R;
+import test.twitter.onix.com.onixtwitter.SectionsPagerAdapter;
 import test.twitter.onix.com.onixtwitter.callbacks.TweetComposerCallback;
 import test.twitter.onix.com.onixtwitter.fragments.HomeTimelineFragment;
-import test.twitter.onix.com.onixtwitter.fragments.HomeTimelineViewPagerFragment;
+import test.twitter.onix.com.onixtwitter.fragments.BlankFragment;
 import test.twitter.onix.com.onixtwitter.fragments.ProfileFragment;
 import test.twitter.onix.com.onixtwitter.fragments.SettingsFragment;
 import test.twitter.onix.com.onixtwitter.fragments.TweetComposerFragment;
@@ -43,6 +44,7 @@ import test.twitter.onix.com.onixtwitter.fragments.TweetComposerFragment;
 public class BaseActivity extends AppCompatActivity implements TweetComposerCallback {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
+    private static final int DEFAULT_OFF_SCREEN_LIMIT = 3;
 
     private PreferencesHelper mSPHelper;
     private TextView mToolbarTopName;
@@ -53,6 +55,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
     private ImageView mDrawerLogo;
     private ImageView mViewPagerIcon;
     private MapFragment mMapFragment;
+    private ViewPager mViewPager;
 
     private boolean mViewPagerIconSwitcher = true;
 
@@ -170,18 +173,26 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
                     Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
                     showViewPagerIcon();
                     mViewPagerIconSwitcher = false;
+
+                    // Create the adapter that will return a fragment for each of the three
+                    // primary sections of the activity.
+                   SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+                    // Set up the ViewPager with the sections adapter.
+                    mViewPager = (ViewPager) findViewById(R.id.pager);
+                    mViewPager.setAdapter(adapter);
+
+                    mViewPager.setOffscreenPageLimit(DEFAULT_OFF_SCREEN_LIMIT);
+
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            HomeTimelineViewPagerFragment.newInstance()).commit();
-
+                            BlankFragment.newInstance()).commit();
                 } else {
-
                     Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
                     mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
                     mViewPagerIconSwitcher = true;
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             getHomeTimelineFragment()).commit();
                 }
-
             }
         });
 
@@ -327,9 +338,11 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
 
     private void hideViewPagerIcon() {
         mViewPagerIcon.setImageResource(0);
+        mViewPagerIcon.setEnabled(false);
     }
 
     private void showViewPagerIcon() {
         mViewPagerIcon.setImageResource(R.drawable.ic_assignment_white_24dp);
+        mViewPagerIcon.setEnabled(true);
     }
 }

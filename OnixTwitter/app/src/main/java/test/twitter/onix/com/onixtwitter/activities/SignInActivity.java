@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import io.fabric.sdk.android.Fabric;
 import io.fabric.sdk.android.Kit;
+import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.PreferencesHelper;
 import test.twitter.onix.com.onixtwitter.R;
 
@@ -28,9 +29,6 @@ public class SignInActivity extends AppCompatActivity {
 
     private PreferencesHelper mSPHelper;
     private TwitterLoginButton mLoginButton;
-
-    public static final String TWITTER_KEY = "GrxnngOM2ohT2ZQ62qmfUGu4n";
-    public static final String TWITTER_SECRET = "9gnNDnKnYm6t7jufvMI5pnJmHZ2YA1mmLebsQYSD1XDvghH7zy";
 
     private static final String TAG = SignInActivity.class.getSimpleName();
 
@@ -52,7 +50,7 @@ public class SignInActivity extends AppCompatActivity {
         conf.locale = new Locale("en");
         res.updateConfiguration(conf, dm);
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_KEY, Constants.TWITTER_SECRET);
         setUpFabricKits(authConfig);
 
         setContentView(R.layout.activity_signin);

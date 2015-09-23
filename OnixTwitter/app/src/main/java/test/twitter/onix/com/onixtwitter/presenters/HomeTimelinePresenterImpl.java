@@ -3,10 +3,8 @@ package test.twitter.onix.com.onixtwitter.presenters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
+import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.views.TimelineView;
 
 import com.twitter.sdk.android.core.Callback;
@@ -15,17 +13,16 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.services.StatusesService;
 import com.twitter.sdk.android.tweetui.FixedTweetTimeline;
-import com.twitter.sdk.android.tweetui.Timeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTimelinePresenter {
 
     private static final String TAG = HomeTimelinePresenterImpl.class.getSimpleName();
-    private TimelineView mTimelineView;
 
-//public static List
+    private TimelineView mTimelineView;
 
     public static HomeTimelinePresenterImpl newInstance(@NonNull TimelineView timelineView) {
         return new HomeTimelinePresenterImpl(timelineView);
@@ -41,8 +38,8 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
         Log.d(TAG, "createTimeline(Context mContext)");
 
         StatusesService statusesService = getStatusesService();
-        final int count = 10;
-        statusesService.homeTimeline(count, null, null, null, null, null, null, getTwitterCallback(context, false));
+
+        statusesService.homeTimeline(Constants.TWEETS_COUNT, null, null, null, null, null, null, getTwitterCallback(context, false));
     }
 
     @Override
@@ -50,8 +47,7 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
         Log.d(TAG, "createTimeline(Context mContext)");
 
         StatusesService statusesService = getStatusesService();
-        final int count = 10;
-        statusesService.homeTimeline(count, null, null, null, null, null, null, getTwitterCallback(context, true));
+        statusesService.homeTimeline(Constants.TWEETS_COUNT, null, null, null, null, null, null, getTwitterCallback(context, true));
     }
 
     @NonNull
@@ -89,9 +85,9 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
 
             TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(mContext, fixedTweetTimeline);
 
-            for (int i = 0; i <= 9; i++) {
-                adapter.getItemId(i);
-                Log.d(TAG, "*******adapter.getItemId()*******: " +  adapter.getItemId(i));
+            Constants.TWEET_ID = new ArrayList<Long>();
+            for (int i = 0; i <= adapter.getCount() - 1; i++) {
+                Constants.TWEET_ID.add(adapter.getItemId(i));
             }
 
             if (isUpdate) {
@@ -116,5 +112,4 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
             mContext = null;
             mTimelineView = null;
         }
-    }
-}
+    }}
