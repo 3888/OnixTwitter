@@ -72,6 +72,7 @@ public class SignInActivity extends AppCompatActivity {
                 Log.d(TAG, "Sign in success");
                 mSPHelper.setBoolean("IS_LOGGED", true);
                 mSPHelper.setString("NICK_NAME", result.data.getUserName());
+
                 finish();
                 Intent baseIntent = new Intent(getApplicationContext(), BaseActivity.class);
                 baseIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

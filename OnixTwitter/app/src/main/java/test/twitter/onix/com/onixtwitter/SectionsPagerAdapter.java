@@ -2,12 +2,15 @@ package test.twitter.onix.com.onixtwitter;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import java.util.Locale;
 
 import test.twitter.onix.com.onixtwitter.fragments.PlaceholderFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+    private static final String TAG = SectionsPagerAdapter.class.getSimpleName();
 
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -22,13 +25,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
+        // Show total pages.
         return Constants.TWEETS_COUNT;
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        Locale l = Locale.getDefault();
-        return String.valueOf(position);
     }
 }

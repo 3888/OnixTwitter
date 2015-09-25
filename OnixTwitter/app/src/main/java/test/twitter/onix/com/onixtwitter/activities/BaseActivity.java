@@ -57,9 +57,11 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
     private ImageView mDrawerLogo;
     private ImageView mViewPagerIcon;
     private MapFragment mMapFragment;
-    private ViewPager mViewPager;
+    public static ViewPager mViewPager;
 
     private boolean mViewPagerIconSwitcher = true;
+
+    private SectionsPagerAdapter mAdapter;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -164,7 +166,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
         mDrawerLogo = (ImageView) findViewById(R.id.drawer_list_logo);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToolbarTopName = (TextView) findViewById(R.id.toolbar_top_tab_name);
-
+        mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
     }
 
     private void setToolbarTop() {
@@ -180,20 +182,12 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
         mViewPagerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (mViewPagerIconSwitcher) {
                     Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
                     showViewPagerIcon();
                     mViewPagerIconSwitcher = false;
-
-                    // Create the adapter that will return a fragment for each of the three
-                    // primary sections of the activity.
-                    SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-                    // Set up the ViewPager with the sections adapter.
-                    mViewPager.setAdapter(adapter);
-
-                    mViewPager.setOffscreenPageLimit(Constants.VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT);
-
+                    setAdapter();
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             ZeroFragment.newInstance()).commit();
                 } else {
@@ -277,6 +271,17 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
         });
     }
 
+    private void setAdapter() {
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+//        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(Constants.VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT);
+
+    }
+
     private void setPanelBottom() {
         ImageButton showMap = (ImageButton) findViewById(R.id.toolbar_bottom_map);
         showMap.setOnClickListener(new View.OnClickListener() {
@@ -325,7 +330,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             @Override
             public void onClick(View view) {
                 showViewPagerIcon();
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         BlankFragment.newInstance()).commit();
             }
         });
@@ -336,7 +341,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             public void onClick(View view) {
                 hideViewPagerIcon();
                 mToolbarTopName.setText("");
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         BlankFragment.newInstance()).commit();
             }
         });
@@ -346,6 +351,9 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
         mViewPagerIcon.setImageResource(0);
         mViewPagerIcon.setEnabled(false);
         mViewPager.setAdapter(null);
+        mViewPager.clearOnPageChangeListeners();
+
+
     }
 
     private void showViewPagerIcon() {

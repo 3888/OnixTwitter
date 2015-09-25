@@ -75,6 +75,7 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
 
             List<Tweet> tweets = result.data;
 
+
             if (tweets == null) {
                 Log.d(TAG, "Tweets is null");
             }
