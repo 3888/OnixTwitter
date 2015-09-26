@@ -42,6 +42,7 @@ import test.twitter.onix.com.onixtwitter.fragments.ZeroFragment;
 import test.twitter.onix.com.onixtwitter.fragments.ProfileFragment;
 import test.twitter.onix.com.onixtwitter.fragments.BlankFragment;
 import test.twitter.onix.com.onixtwitter.fragments.TweetComposerFragment;
+import test.twitter.onix.com.onixtwitter.fragments.ZoomFragment;
 
 public class BaseActivity extends AppCompatActivity implements TweetComposerCallback {
 
@@ -330,7 +331,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             @Override
             public void onClick(View view) {
                 showViewPagerIcon();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         BlankFragment.newInstance()).commit();
             }
         });
@@ -341,8 +342,12 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             public void onClick(View view) {
                 hideViewPagerIcon();
                 mToolbarTopName.setText("");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        BlankFragment.newInstance()).commit();
+
+                Intent singInIntent = new Intent(getApplicationContext(), CustomServiceActivity.class);
+                singInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(singInIntent);
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                        ZoomFragment.newInstance()).commit();
             }
         });
     }
@@ -351,9 +356,6 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
         mViewPagerIcon.setImageResource(0);
         mViewPagerIcon.setEnabled(false);
         mViewPager.setAdapter(null);
-        mViewPager.clearOnPageChangeListeners();
-
-
     }
 
     private void showViewPagerIcon() {

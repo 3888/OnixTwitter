@@ -1,7 +1,6 @@
 package test.twitter.onix.com.onixtwitter.fragments;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,15 @@ import com.melnykov.fab.FloatingActionButton;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.internal.TwitterApiConstants;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import butterknife.ButterKnife;
 import test.twitter.onix.com.onixtwitter.Constants;
@@ -129,9 +133,10 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
             public void success(final Result<Tweet> result) {
                 mTweetLayout.removeAllViews();
                 mTweetLayout.addView(new TweetView(getActivity(), result.data));
-//                if (result.data.entities.media != null) {
-//
-//                    Log.e(TAG, "******************" + result.data.entities.urls.toArray());
+                if (result.data.entities.media != null) {
+
+                    Log.e(TAG, "******************" + result.data.entities.urls.toArray());
+
 //                    mTweetLayout.setOnClickListener(new View.OnClickListener() {
 //                        @Override
 //                        public void onClick(View v) {
@@ -141,7 +146,7 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
 //                                ZoomFragment.newInstance()).commit();
 //                        }
 //                    });
-//                }
+                }
             }
 
             @Override
