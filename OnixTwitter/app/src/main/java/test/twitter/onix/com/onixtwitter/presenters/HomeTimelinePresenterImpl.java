@@ -86,6 +86,7 @@ public class HomeTimelinePresenterImpl extends BasePresenter implements HomeTime
 
             TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(mContext, fixedTweetTimeline);
 
+
             Constants.TWEET_ID_LIST = new ArrayList<Long>();
             for (int i = 0; i <= adapter.getCount() - 1; i++) {
                 Constants.TWEET_ID_LIST.add(adapter.getItemId(i));

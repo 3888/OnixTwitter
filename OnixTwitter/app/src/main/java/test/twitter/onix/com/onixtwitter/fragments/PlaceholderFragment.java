@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.twitter.sdk.android.core.Callback;
@@ -15,16 +16,9 @@ import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-
 import butterknife.ButterKnife;
 import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.R;
-import test.twitter.onix.com.onixtwitter.activities.BaseActivity;
 
 public class PlaceholderFragment extends android.support.v4.app.Fragment {
     /**
@@ -56,13 +50,13 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_view_pager_item, container, false);
+        View view = inflater.inflate(R.layout.fragment_vertical_view_pager_item, container, false);
         Log.d(TAG, "onCreateView ");
 
-        Log.d(TAG, "mViewPager.getCurrentItem()*******  " + BaseActivity.mViewPager.getCurrentItem());
+        Log.d(TAG, "mViewPager.getCurrentItem()*******  " + VerticalViewPagerFragment.sViewPager.getCurrentItem());
 
         FloatingActionButton fabUp;
-        fabUp = (FloatingActionButton) rootView.findViewById(R.id.view_pager_placeholder_fab_up);
+        fabUp = (FloatingActionButton) view.findViewById(R.id.view_pager_placeholder_fab_up);
         fabUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,10 +66,10 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
                     mTweedIDPosition--;
                     Log.d(TAG, "mTweedIDPosition-- " + mTweedIDPosition);
                     if (mTweedIDPosition == 0) {
-                        BaseActivity.mViewPager.setCurrentItem(mTweedIDPosition + 1);
+                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition + 1);
                         Log.d(TAG, "IF******setCurrentItem   " + (mTweedIDPosition + 1));
                     } else {
-                        BaseActivity.mViewPager.setCurrentItem(mTweedIDPosition);
+                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition);
                         Log.d(TAG, "ELSE******setCurrentItem  " + mTweedIDPosition);
                     }
 
@@ -87,7 +81,7 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
         });
 
         FloatingActionButton fabDown;
-        fabDown = (FloatingActionButton) rootView.findViewById(R.id.view_pager_placeholder_fab_down);
+        fabDown = (FloatingActionButton) view.findViewById(R.id.view_pager_placeholder_fab_down);
         fabDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,11 +91,11 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
                     mTweedIDPosition++;
                     Log.d(TAG, "mTweedIDPosition++ " + mTweedIDPosition);
                     if (mTweedIDPosition == Constants.TWEETS_COUNT - 1) {
-                        BaseActivity.mViewPager.setCurrentItem(mTweedIDPosition - 1);
+                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition - 1);
                         Log.d(TAG, "IF******setCurrentItem  " + (mTweedIDPosition - 1));
 
                     } else {
-                        BaseActivity.mViewPager.setCurrentItem(mTweedIDPosition);
+                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition);
                         Log.d(TAG, "ELSE******setCurrentItem" + mTweedIDPosition);
                     }
                     mTweetId = Constants.TWEET_ID_LIST.get(mTweedIDPosition);
@@ -111,8 +105,8 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        ButterKnife.bind(this, rootView);
-        mTweetLayout = (LinearLayout) rootView.findViewById(R.id.view_pager_placeholder_tweet_layout);
+        ButterKnife.bind(this, view);
+        mTweetLayout = (LinearLayout) view.findViewById(R.id.view_pager_placeholder_tweet_layout);
         mTweedIDPosition = getArguments().getInt(ARG_SECTION_NUMBER);
         Log.d(TAG, "mTweedIDPosition = getArguments().getInt(ARG_SECTION_NUMBER) " + mTweedIDPosition);
         try {
@@ -123,7 +117,7 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
 
         loadTweet(mTweetId);
         Log.d(TAG, "loadTweet " + mTweetId);
-        return rootView;
+        return view;
     }
 
     private void loadTweet(long tweetId) {
@@ -133,19 +127,22 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
             public void success(final Result<Tweet> result) {
                 mTweetLayout.removeAllViews();
                 mTweetLayout.addView(new TweetView(getActivity(), result.data));
-                if (result.data.entities.media != null) {
-
+                if (result.data.entities.media != null)
+                {
                     Log.e(TAG, "******************" + result.data.entities.urls.toArray());
 
-//                    mTweetLayout.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            BaseActivity.mViewPager.setAdapter(null);
-//
-//                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                                ZoomFragment.newInstance()).commit();
-//                        }
-//                    });
+                }else {
+
+                        mTweetLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                           VerticalViewPagerFragment.sViewPager.setAdapter(null);
+
+                            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                    ZoomFragment.newInstance()).commit();
+                        }
+                    });
                 }
             }
 
