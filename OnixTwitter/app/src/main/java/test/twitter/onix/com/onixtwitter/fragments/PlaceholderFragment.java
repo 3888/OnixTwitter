@@ -6,36 +6,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.models.MediaEntity;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.R;
+import test.twitter.onix.com.onixtwitter.activities.BaseActivity;
 
 public class PlaceholderFragment extends android.support.v4.app.Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = PlaceholderFragment.class.getSimpleName();
     private LinearLayout mTweetLayout;
+    private View mFocusButton;
     private long mTweetId;
     private int mTweedIDPosition;
+    private String mTweetImageUrl;
 
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static PlaceholderFragment newInstance(int sectionNumber) {
         PlaceholderFragment fragment = new PlaceholderFragment();
         Bundle args = new Bundle();
@@ -44,38 +42,19 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
         return fragment;
     }
 
-    public PlaceholderFragment() {
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vertical_view_pager_item, container, false);
-        Log.d(TAG, "onCreateView ");
 
-        Log.d(TAG, "mViewPager.getCurrentItem()*******  " + VerticalViewPagerFragment.sViewPager.getCurrentItem());
+        mFocusButton = view.findViewById(R.id.view_pager_focus);
 
         FloatingActionButton fabUp;
         fabUp = (FloatingActionButton) view.findViewById(R.id.view_pager_placeholder_fab_up);
         fabUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (mTweedIDPosition > 0) {
-                    Log.d(TAG, "fabUp" + "\n");
-                    mTweedIDPosition--;
-                    Log.d(TAG, "mTweedIDPosition-- " + mTweedIDPosition);
-                    if (mTweedIDPosition == 0) {
-                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition + 1);
-                        Log.d(TAG, "IF******setCurrentItem   " + (mTweedIDPosition + 1));
-                    } else {
-                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition);
-                        Log.d(TAG, "ELSE******setCurrentItem  " + mTweedIDPosition);
-                    }
-
-                    mTweetId = Constants.TWEET_ID_LIST.get(mTweedIDPosition);
-                    loadTweet(mTweetId);
-                    Log.d(TAG, "loadTweet " + mTweetId);
+                    setPage(--mTweedIDPosition);
                 }
             }
         });
@@ -85,22 +64,8 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
         fabDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (mTweedIDPosition < Constants.TWEETS_COUNT - 1) {
-                    Log.d(TAG, "fabDown" + "\n");
-                    mTweedIDPosition++;
-                    Log.d(TAG, "mTweedIDPosition++ " + mTweedIDPosition);
-                    if (mTweedIDPosition == Constants.TWEETS_COUNT - 1) {
-                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition - 1);
-                        Log.d(TAG, "IF******setCurrentItem  " + (mTweedIDPosition - 1));
-
-                    } else {
-                        VerticalViewPagerFragment.sViewPager.setCurrentItem(mTweedIDPosition);
-                        Log.d(TAG, "ELSE******setCurrentItem" + mTweedIDPosition);
-                    }
-                    mTweetId = Constants.TWEET_ID_LIST.get(mTweedIDPosition);
-                    loadTweet(mTweetId);
-                    Log.d(TAG, "loadTweet " + mTweetId);
+                if (mTweedIDPosition < Constants.TWEET_ID_LIST.size() - 1) {
+                    setPage(++mTweedIDPosition);
                 }
             }
         });
@@ -108,7 +73,7 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
         ButterKnife.bind(this, view);
         mTweetLayout = (LinearLayout) view.findViewById(R.id.view_pager_placeholder_tweet_layout);
         mTweedIDPosition = getArguments().getInt(ARG_SECTION_NUMBER);
-        Log.d(TAG, "mTweedIDPosition = getArguments().getInt(ARG_SECTION_NUMBER) " + mTweedIDPosition);
+
         try {
             mTweetId = Constants.TWEET_ID_LIST.get(getArguments().getInt(ARG_SECTION_NUMBER));
         } catch (Exception e) {
@@ -116,31 +81,31 @@ public class PlaceholderFragment extends android.support.v4.app.Fragment {
         }
 
         loadTweet(mTweetId);
-        Log.d(TAG, "loadTweet " + mTweetId);
+        Log.d(TAG, "loadTweet " + mTweetId + " pos = " + mTweedIDPosition);
         return view;
     }
 
-    private void loadTweet(long tweetId) {
+    private void setPage(int page) {
+        ((BaseActivity) getActivity()).getVerticalViewPagerFragment().getViewPager().setCurrentItem(page);
+    }
 
+    private void loadTweet(long tweetId) {
         TweetUtils.loadTweet(tweetId, new Callback<Tweet>() {
             @Override
             public void success(final Result<Tweet> result) {
                 mTweetLayout.removeAllViews();
                 mTweetLayout.addView(new TweetView(getActivity(), result.data));
-                if (result.data.entities.media != null)
-                {
-                    Log.e(TAG, "******************" + result.data.entities.urls.toArray());
-
-                }else {
-
-                        mTweetLayout.setOnClickListener(new View.OnClickListener() {
+                if (result.data.entities.media != null) {
+                    List<MediaEntity> urls = result.data.entities.media;
+                    for (int i = 0; i < urls.size(); i++) {
+                        mTweetImageUrl = urls.get(i).mediaUrl;
+                        Log.e(TAG, "urls.get(i).mediaUrl = " + urls.get(i).mediaUrl);
+                    }
+                    mFocusButton.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
-
-                           VerticalViewPagerFragment.sViewPager.setAdapter(null);
-
+                        public void onClick(View view) {
                             getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                    ZoomFragment.newInstance()).commit();
+                                    PreviewZoomFragment.newInstance(mTweetImageUrl)).commit();
                         }
                     });
                 }

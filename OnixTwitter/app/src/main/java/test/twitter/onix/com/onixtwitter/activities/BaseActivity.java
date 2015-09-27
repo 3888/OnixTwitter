@@ -54,6 +54,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
     private ImageView mViewPagerIcon;
     private MapFragment mMapFragment;
 
+    private VerticalViewPagerFragment mVerticalViewPagerFragment;
     private boolean mViewPagerIconSwitcher = true;
 
     @Override
@@ -169,6 +170,8 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
         }
 
+        mVerticalViewPagerFragment = VerticalViewPagerFragment.newInstance();
+
         mViewPagerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,7 +181,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
                     showViewPagerIcon();
                     mViewPagerIconSwitcher = false;
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            VerticalViewPagerFragment.newInstance()).commit();
+                            mVerticalViewPagerFragment).commit();
                 } else {
                     Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
                     mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
@@ -266,7 +269,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             public void onClick(View view) {
                 showViewPagerIcon();
                 mToolbarTopName.setText("");
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         BlankFragment.newInstance()).commit();
             }
         });
@@ -313,8 +316,6 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             }
         });
 
-
-
         ImageButton settings = (ImageButton) findViewById(R.id.toolbar_bottom_settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -322,11 +323,8 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
                 hideViewPagerIcon();
                 mToolbarTopName.setText("");
 
-                Intent singInIntent = new Intent(getApplicationContext(), CustomServiceActivity.class);
-                singInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(singInIntent);
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-//                        ZoomFragment.newInstance()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        BlankFragment.newInstance()).commit();
             }
         });
     }
@@ -339,5 +337,9 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
     private void showViewPagerIcon() {
         mViewPagerIcon.setImageResource(R.drawable.ic_assignment_white_24dp);
         mViewPagerIcon.setEnabled(true);
+    }
+
+    public VerticalViewPagerFragment getVerticalViewPagerFragment() {
+        return mVerticalViewPagerFragment;
     }
 }

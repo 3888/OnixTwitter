@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.R;
 import test.twitter.onix.com.onixtwitter.SectionsPagerAdapter;
+import test.twitter.onix.com.onixtwitter.activities.BaseActivity;
 
 public class VerticalViewPagerFragment extends Fragment {
 
     private static final String TAG = VerticalViewPagerFragment.class.getSimpleName();
 
-    public static ViewPager sViewPager;
-
-
-    public VerticalViewPagerFragment() {
-    }
+    private ViewPager mViewPager;
 
     public static VerticalViewPagerFragment newInstance() {
         return new VerticalViewPagerFragment();
@@ -29,10 +26,15 @@ public class VerticalViewPagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_vertical_view_pager, container, false);
 
-        sViewPager = (ViewPager) view.findViewById(R.id.pager);
+        mViewPager = (ViewPager) view.findViewById(R.id.pager);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager());
-        sViewPager.setAdapter(adapter);
-        sViewPager.setOffscreenPageLimit(Constants.VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT);
+        mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(Constants.VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT);
+
         return view;
+    }
+
+    public ViewPager getViewPager() {
+        return mViewPager;
     }
 }

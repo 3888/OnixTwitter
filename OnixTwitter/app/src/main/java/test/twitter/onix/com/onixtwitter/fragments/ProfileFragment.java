@@ -44,15 +44,15 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mSPHelper = new PreferencesHelper(getActivity().getApplicationContext());
 
-        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        mUserImage = (ImageView) v.findViewById(R.id.profile_user_image_view);
-        mUserName = (TextView) v.findViewById(R.id.profile_name);
-        mUserNickName = (TextView) v.findViewById(R.id.profile_nick_name);
-        mUserTweets = (TextView) v.findViewById(R.id.profile_tweets);
-        mUserFollowers = (TextView) v.findViewById(R.id.profile_followers);
-        mUserFollowing = (TextView) v.findViewById(R.id.profile_following);
-        mUserLocation = (TextView) v.findViewById(R.id.profile_location);
+        mUserImage = (ImageView) view.findViewById(R.id.profile_user_image_view);
+        mUserName = (TextView) view.findViewById(R.id.profile_name);
+        mUserNickName = (TextView) view.findViewById(R.id.profile_nick_name);
+        mUserTweets = (TextView) view.findViewById(R.id.profile_tweets);
+        mUserFollowers = (TextView) view.findViewById(R.id.profile_followers);
+        mUserFollowing = (TextView) view.findViewById(R.id.profile_following);
+        mUserLocation = (TextView) view.findViewById(R.id.profile_location);
 
         TwitterSession session = Twitter.getSessionManager()
                 .getActiveSession();
@@ -84,7 +84,7 @@ public class ProfileFragment extends Fragment {
                     }
                 });
 
-        return v;
+        return view;
     }
 
     @Override

@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_pager_placeholder_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
     tools:context=".MainActivity$PlaceholderFragment">
 
@@ -11,41 +11,51 @@
         android:id="@+id/view_pager_placeholder_fab_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_arrow_up_bold"
         fab:fab_colorNormal="@color/primary_dark"
         fab:fab_colorPressed="@color/primary"
-        fab:fab_colorRipple="@color/primary_ripple"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp" />
+        fab:fab_colorRipple="@color/primary_ripple" />
 
-    <LinearLayout
-        android:id="@+id/view_pager_placeholder_tweet_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/view_pager_placeholder_tweet_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+
+        <View
+            android:id="@+id/view_pager_focus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"/>
+    </RelativeLayout>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/view_pager_placeholder_fab_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_arrow_down_bold"
         fab:fab_colorNormal="@color/primary_dark"
         fab:fab_colorPressed="@color/primary"
-        fab:fab_colorRipple="@color/primary_ripple"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp" />
+        fab:fab_colorRipple="@color/primary_ripple" />
+
     <View
         android:id="@+id/mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>

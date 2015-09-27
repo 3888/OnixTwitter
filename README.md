@@ -7,15 +7,15 @@ Test project
 
 ++1) The application should load content from users’ feeds via Twitter API.  
 
-2)At the top of the left corner the switcher is placed. This element switches the view mode from 
+++2)At the top of the left corner the switcher is placed. This element switches the view mode from 
 the list to a vertical pager.  
 
-Pager mode: a user can see only one element per page and moves up/down by swiping or 
+++Pager mode: a user can see only one element per page and moves up/down by swiping or 
 tapping particular buttons. It is the navigation button that can be implemented as the ‘float 
 button’ etc.  
 
 
-3) Click/tap on the picture should open a picture preview (4) screen. 
+++3) Click/tap on the picture should open a picture preview (4) screen. 
 
 4) Preview must have a zoom functionality.  
 
