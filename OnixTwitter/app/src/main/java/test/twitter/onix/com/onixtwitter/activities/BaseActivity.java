@@ -120,7 +120,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
 
     @Override
     public void displayTweetComposer() {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 TweetComposerFragment.newInstance()).addToBackStack(null).commit();
     }
 
@@ -170,7 +170,6 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
             mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
         }
 
-        mVerticalViewPagerFragment = VerticalViewPagerFragment.newInstance();
 
         mViewPagerIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,12 +179,15 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
                     Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
                     showViewPagerIcon();
                     mViewPagerIconSwitcher = false;
+                    mVerticalViewPagerFragment = VerticalViewPagerFragment.newInstance();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             mVerticalViewPagerFragment).commit();
+
                 } else {
                     Log.d(TAG, "mViewPagerIconSwitcher " + mViewPagerIconSwitcher);
                     mViewPagerIcon.setImageResource(R.drawable.ic_description_white_24dp);
                     mViewPagerIconSwitcher = true;
+                    mVerticalViewPagerFragment.getViewPager().setAdapter(null);
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             getHomeTimelineFragment()).commit();
                 }
@@ -218,8 +220,7 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
                         break;
                     case 2:
                         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                TweetComposerFragment.newInstance()).addToBackStack(null).commit();
+                        displayTweetComposer();
                         break;
                 }
             }
@@ -332,11 +333,13 @@ public class BaseActivity extends AppCompatActivity implements TweetComposerCall
     private void hideViewPagerIcon() {
         mViewPagerIcon.setImageResource(0);
         mViewPagerIcon.setEnabled(false);
+
     }
 
     private void showViewPagerIcon() {
         mViewPagerIcon.setImageResource(R.drawable.ic_assignment_white_24dp);
         mViewPagerIcon.setEnabled(true);
+
     }
 
     public VerticalViewPagerFragment getVerticalViewPagerFragment() {

@@ -10,11 +10,8 @@ import android.view.ViewGroup;
 import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.R;
 import test.twitter.onix.com.onixtwitter.SectionsPagerAdapter;
-import test.twitter.onix.com.onixtwitter.activities.BaseActivity;
 
 public class VerticalViewPagerFragment extends Fragment {
-
-    private static final String TAG = VerticalViewPagerFragment.class.getSimpleName();
 
     private ViewPager mViewPager;
 
