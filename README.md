@@ -17,7 +17,7 @@ button’ etc.
 
 ++3) Click/tap on the picture should open a picture preview (4) screen. 
 
-4) Preview must have a zoom functionality.  
+++4) Preview must have a zoom functionality.  
 
 ++5)Profile ­ screen (5). This screen will show a user’s profile information from Twitter.  
 
@@ -26,7 +26,7 @@ button’ etc.
 
 ++6.1) Click on infobubble should open an external link or show a pop­up.  
 
-7) Tab on screen 7 will be empty.  
+++7) Tab on screen 7 will be empty.  
 
 ++8) The right navigation menu has only 3 points and a logo.
   
