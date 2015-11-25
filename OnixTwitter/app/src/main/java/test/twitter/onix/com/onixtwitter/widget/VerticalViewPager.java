@@ -1,9 +1,5 @@
 package test.twitter.onix.com.onixtwitter.widget;
 
-/**
- * Created by ericlee on 2015/7/30.
- */
-
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
