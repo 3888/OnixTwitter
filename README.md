@@ -30,8 +30,7 @@ button’ etc.
 
 ++8) The right navigation menu has only 3 points and a logo.
   
-8.2) 
-++3rd point in navigation menu should be called “my skills”, click on this item open the new page. 
+++8.2) 3rd point in navigation menu should be called “my skills”, click on this item open the new page. 
 On this should be present any custom view plus here is you can add any functionality todemonstrate your skills in Android. 
 
 
