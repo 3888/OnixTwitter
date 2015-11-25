@@ -22,7 +22,6 @@ public class TweetComposerFragment extends Fragment implements TweetComposerView
 
     private static final String TAG = TweetComposerFragment.class.getSimpleName();
 
-    private Button mTweetButton;
     private EditText mEditText;
     private TweetComposerCallback mTweetComposerCallback;
     private TweetComposerPresenter mTweetComposerPresenter;
@@ -61,11 +60,11 @@ public class TweetComposerFragment extends Fragment implements TweetComposerView
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated(Bundle savedInstanceState)");
 
-        mTweetButton = (Button) getActivity().findViewById(R.id.tweet_button);
+        Button tweetButton = (Button) getActivity().findViewById(R.id.tweet_button);
         mEditText = (EditText) getActivity().findViewById(R.id.tweet_box);
         mEditText.requestFocus();
 
-        mTweetButton.setOnClickListener(new View.OnClickListener() {
+        tweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "click before building tweet");

@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
                         mUserName.setText(user.name);
                         mUserNickName.setText("@" + mSPHelper.getString("NICK_NAME"));
-                        if ((user.location == "")) {
+                        if ((user.location.equals(""))) {
                             mUserLocation.setText(getString(R.string.profile_no_location));
                         } else {
                             mUserLocation.setText(user.location);
@@ -75,7 +75,8 @@ public class ProfileFragment extends Fragment {
                         mUserFollowers.setText(Integer.toString(user.followersCount));
                         mUserFollowing.setText(Integer.toString(user.friendsCount));
 
-                        Picasso.with(getActivity()).load(user.profileImageUrl.replace("_normal", "_bigger")).into(mUserImage);
+                        Picasso.with(getActivity()).load(user.profileImageUrl.
+                                replace("_normal", "_bigger")).into(mUserImage);
                     }
 
                     @Override

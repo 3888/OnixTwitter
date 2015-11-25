@@ -40,9 +40,7 @@ public class HomeTimelineFragment extends ListFragment implements TimelineView {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_timeline, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_timeline, container, false);
     }
 
     public void onResume() {

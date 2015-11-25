@@ -17,7 +17,7 @@ public class PreferencesHelper {
         SharedPreferences.Editor sharedPrefEdit = sharedPref.edit();
 
         sharedPrefEdit.putString(key, value);
-        sharedPrefEdit.commit();
+        sharedPrefEdit.apply();
     }
 
     public void setInt(String key, int value) {
@@ -25,7 +25,7 @@ public class PreferencesHelper {
         SharedPreferences.Editor sharedPrefEdit = sharedPref.edit();
 
         sharedPrefEdit.putInt(key, value);
-        sharedPrefEdit.commit();
+        sharedPrefEdit.apply();
     }
 
     public void setLong(String key, long value) {
@@ -33,7 +33,7 @@ public class PreferencesHelper {
         SharedPreferences.Editor sharedPrefEdit = sharedPref.edit();
 
         sharedPrefEdit.putLong(key, value);
-        sharedPrefEdit.commit();
+        sharedPrefEdit.apply();
     }
 
     public void setFloat(String key, float value) {
@@ -41,7 +41,7 @@ public class PreferencesHelper {
         SharedPreferences.Editor sharedPrefEdit = sharedPref.edit();
 
         sharedPrefEdit.putFloat(key, value);
-        sharedPrefEdit.commit();
+        sharedPrefEdit.apply();
     }
 
     public void setBoolean(String key, boolean value) {
@@ -49,7 +49,7 @@ public class PreferencesHelper {
         SharedPreferences.Editor sharedPrefEdit = sharedPref.edit();
 
         sharedPrefEdit.putBoolean(key, value);
-        sharedPrefEdit.commit();
+        sharedPrefEdit.apply();
     }
 
     public String getString(String key) {

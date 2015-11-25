@@ -7,6 +7,7 @@ import android.util.Log;
 
 import test.twitter.onix.com.onixtwitter.R;
 import test.twitter.onix.com.onixtwitter.views.TweetComposerView;
+
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -24,7 +25,8 @@ public class TweetComposerPresenterImpl extends BasePresenter implements TweetCo
         this.mContext = context;
     }
 
-    public static TweetComposerPresenterImpl newInstance(@NonNull TweetComposerView tweetComposerView, @NonNull Context context) {
+    public static TweetComposerPresenterImpl newInstance
+            (@NonNull TweetComposerView tweetComposerView, @NonNull Context context) {
         return new TweetComposerPresenterImpl(tweetComposerView, context);
     }
 
@@ -34,12 +36,13 @@ public class TweetComposerPresenterImpl extends BasePresenter implements TweetCo
 
         int tweetLength = getTweetLength(tweet);
 
-        if (tweetLength == -1)  {
+        if (tweetLength == -1) {
             return;
         }
 
         StatusesService statusesService = getStatusesService();
-        statusesService.update(tweet.substring(0, tweetLength), null, null, null, null, null, null, null, getTweetBuilderCallback(mTweetComposerView));
+        statusesService.update(tweet.substring(0, tweetLength), null, null, null, null, null, null, null,
+                getTweetBuilderCallback(mTweetComposerView));
     }
 
     Callback<Tweet> getTweetBuilderCallback(TweetComposerView tweetComposerView) {
@@ -73,13 +76,13 @@ public class TweetComposerPresenterImpl extends BasePresenter implements TweetCo
 
         @Override
         public void success(Result<Tweet> result) {
-            Log.d(TAG,"Tweet has been sent");
+            Log.d(TAG, "Tweet has been sent");
             tweetComposerView.tweetSent();
         }
 
         @Override
         public void failure(TwitterException e) {
-            Log.e(TAG,"Twitter exception thrown",e);
+            Log.e(TAG, "Twitter exception thrown", e);
             tweetComposerView.tweetError(e.getMessage());
         }
     }

@@ -8,7 +8,6 @@ import android.view.View;
 
 import test.twitter.onix.com.onixtwitter.R;
 
-
 /**
  * Uses a combination of a PageTransformer and swapping X & Y coordinates
  * of touch events to create the illusion of a vertically scrolling ViewPager.
