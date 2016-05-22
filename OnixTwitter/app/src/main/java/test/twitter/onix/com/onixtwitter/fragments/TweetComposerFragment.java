@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import test.twitter.onix.com.onixtwitter.R;
 import test.twitter.onix.com.onixtwitter.callbacks.TweetComposerCallback;
 import test.twitter.onix.com.onixtwitter.presenters.TweetComposerPresenter;
@@ -22,11 +24,13 @@ public class TweetComposerFragment extends Fragment implements TweetComposerView
 
     private static final String TAG = TweetComposerFragment.class.getSimpleName();
 
-    private EditText mEditText;
+    @Bind(R.id.tweet_box) EditText mEditText;
+    @Bind((R.id.tweet_button))Button tweetButton;
     private TweetComposerCallback mTweetComposerCallback;
     private TweetComposerPresenter mTweetComposerPresenter;
 
-    public TweetComposerFragment() { }
+    public TweetComposerFragment() {
+    }
 
     public static TweetComposerFragment newInstance() {
         return new TweetComposerFragment();
@@ -52,7 +56,10 @@ public class TweetComposerFragment extends Fragment implements TweetComposerView
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tweet, container, false);
+        View view = inflater.inflate(R.layout.fragment_tweet, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
@@ -60,8 +67,6 @@ public class TweetComposerFragment extends Fragment implements TweetComposerView
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated(Bundle savedInstanceState)");
 
-        Button tweetButton = (Button) getActivity().findViewById(R.id.tweet_button);
-        mEditText = (EditText) getActivity().findViewById(R.id.tweet_box);
         mEditText.requestFocus();
 
         tweetButton.setOnClickListener(new View.OnClickListener() {

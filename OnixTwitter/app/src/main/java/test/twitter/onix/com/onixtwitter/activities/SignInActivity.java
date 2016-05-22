@@ -29,6 +29,8 @@ public class SignInActivity extends AppCompatActivity {
 
     private PreferencesHelper mSPHelper;
     private TwitterLoginButton mLoginButton;
+    private final String TWITTER_KEY = "GrxnngOM2ohT2ZQ62qmfUGu4n";
+    private final String TWITTER_SECRET = "9gnNDnKnYm6t7jufvMI5pnJmHZ2YA1mmLebsQYSD1XDvghH7zy";
 
     private static final String TAG = SignInActivity.class.getSimpleName();
 
@@ -50,7 +52,7 @@ public class SignInActivity extends AppCompatActivity {
         conf.locale = new Locale("en");
         res.updateConfiguration(conf, dm);
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(Constants.TWITTER_KEY, Constants.TWITTER_SECRET);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         setUpFabricKits(authConfig);
 
         setContentView(R.layout.activity_signin);

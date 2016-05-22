@@ -17,21 +17,23 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import test.twitter.onix.com.onixtwitter.PreferencesHelper;
 import test.twitter.onix.com.onixtwitter.R;
 
 public class ProfileFragment extends Fragment {
 
     private static final String TAG = ProfileFragment.class.getSimpleName();
-
     private PreferencesHelper mSPHelper;
-    private ImageView mUserImage;
-    private TextView mUserName;
-    private TextView mUserNickName;
-    private TextView mUserTweets;
-    private TextView mUserFollowers;
-    private TextView mUserFollowing;
-    private TextView mUserLocation;
+
+    @Bind(R.id.profile_user_image_view) ImageView mUserImage;
+    @Bind(R.id.profile_name) TextView mUserName;
+    @Bind(R.id.profile_nick_name) TextView mUserNickName;
+    @Bind(R.id.profile_tweets) TextView mUserTweets;
+    @Bind(R.id.profile_followers) TextView mUserFollowers;
+    @Bind(R.id.profile_following) TextView mUserFollowing;
+    @Bind(R.id.profile_location) TextView mUserLocation;
 
     public ProfileFragment() {
     }
@@ -43,16 +45,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mSPHelper = new PreferencesHelper(getActivity().getApplicationContext());
-
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        mUserImage = (ImageView) view.findViewById(R.id.profile_user_image_view);
-        mUserName = (TextView) view.findViewById(R.id.profile_name);
-        mUserNickName = (TextView) view.findViewById(R.id.profile_nick_name);
-        mUserTweets = (TextView) view.findViewById(R.id.profile_tweets);
-        mUserFollowers = (TextView) view.findViewById(R.id.profile_followers);
-        mUserFollowing = (TextView) view.findViewById(R.id.profile_following);
-        mUserLocation = (TextView) view.findViewById(R.id.profile_location);
+        ButterKnife.bind(this, view);
 
         TwitterSession session = Twitter.getSessionManager()
                 .getActiveSession();
@@ -65,15 +59,15 @@ public class ProfileFragment extends Fragment {
                         User user = userResult.data;
 
                         mUserName.setText(user.name);
-                        mUserNickName.setText("@" + mSPHelper.getString("NICK_NAME"));
+                        mUserNickName.append("@" + mSPHelper.getString("NICK_NAME"));
                         if ((user.location.equals(""))) {
                             mUserLocation.setText(getString(R.string.profile_no_location));
                         } else {
                             mUserLocation.setText(user.location);
                         }
-                        mUserTweets.setText(Integer.toString(user.statusesCount));
-                        mUserFollowers.setText(Integer.toString(user.followersCount));
-                        mUserFollowing.setText(Integer.toString(user.friendsCount));
+                        mUserTweets.setText(String.valueOf(user.statusesCount));
+                        mUserFollowers.setText(String.valueOf(user.followersCount));
+                        mUserFollowing.setText(String.valueOf(user.friendsCount));
 
                         Picasso.with(getActivity()).load(user.profileImageUrl.
                                 replace("_normal", "_bigger")).into(mUserImage);

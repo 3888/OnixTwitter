@@ -19,6 +19,7 @@ import com.twitter.sdk.android.tweetui.TweetView;
 
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import test.twitter.onix.com.onixtwitter.Constants;
 import test.twitter.onix.com.onixtwitter.R;
@@ -28,8 +29,14 @@ public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String TAG = PlaceholderFragment.class.getSimpleName();
-    private LinearLayout mTweetLayout;
-    private View mFocusButton;
+    @Bind(R.id.view_pager_placeholder_tweet_layout)
+    LinearLayout mTweetLayout;
+    @Bind(R.id.view_pager_focus)
+    View mFocusButton;
+    @Bind(R.id.view_pager_placeholder_fab_up)
+    FloatingActionButton mFabUp;
+    @Bind(R.id.view_pager_placeholder_fab_down)
+    FloatingActionButton FabDown;
     private long mTweetId;
     private int mTweedIDPosition;
     private String mTweetImageUrl;
@@ -46,12 +53,9 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_vertical_view_pager_item, container, false);
+        ButterKnife.bind(this, view);
 
-        mFocusButton = view.findViewById(R.id.view_pager_focus);
-
-        FloatingActionButton fabUp;
-        fabUp = (FloatingActionButton) view.findViewById(R.id.view_pager_placeholder_fab_up);
-        fabUp.setOnClickListener(new View.OnClickListener() {
+        mFabUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mTweedIDPosition > 0) {
@@ -60,9 +64,7 @@ public class PlaceholderFragment extends Fragment {
             }
         });
 
-        FloatingActionButton fabDown;
-        fabDown = (FloatingActionButton) view.findViewById(R.id.view_pager_placeholder_fab_down);
-        fabDown.setOnClickListener(new View.OnClickListener() {
+        FabDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mTweedIDPosition < Constants.TWEET_ID_LIST.size() - 1) {
@@ -71,8 +73,6 @@ public class PlaceholderFragment extends Fragment {
             }
         });
 
-        ButterKnife.bind(this, view);
-        mTweetLayout = (LinearLayout) view.findViewById(R.id.view_pager_placeholder_tweet_layout);
         mTweedIDPosition = getArguments().getInt(ARG_SECTION_NUMBER);
 
         try {

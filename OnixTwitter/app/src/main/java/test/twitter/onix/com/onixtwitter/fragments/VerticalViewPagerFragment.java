@@ -14,6 +14,7 @@ import test.twitter.onix.com.onixtwitter.SectionsPagerAdapter;
 public class VerticalViewPagerFragment extends Fragment {
 
     private ViewPager mViewPager;
+    private final int VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT = 1;
 
     public static VerticalViewPagerFragment newInstance() {
         return new VerticalViewPagerFragment();
@@ -26,7 +27,7 @@ public class VerticalViewPagerFragment extends Fragment {
         mViewPager = (ViewPager) view.findViewById(R.id.pager);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(adapter);
-        mViewPager.setOffscreenPageLimit(Constants.VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT);
+        mViewPager.setOffscreenPageLimit(VIEW_PAGER_DEFAULT_OFF_SCREEN_LIMIT);
 
         return view;
     }

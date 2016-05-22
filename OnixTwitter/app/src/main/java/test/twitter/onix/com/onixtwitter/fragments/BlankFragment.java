@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import test.twitter.onix.com.onixtwitter.R;
 
-
 public class BlankFragment extends Fragment {
 
     public static BlankFragment newInstance() {

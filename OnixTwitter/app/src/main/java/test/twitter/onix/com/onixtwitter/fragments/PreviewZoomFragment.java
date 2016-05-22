@@ -13,7 +13,7 @@ import test.twitter.onix.com.onixtwitter.R;
 
 public class PreviewZoomFragment extends Fragment {
 
-    private static final String ARG_TWEET_IMAGE_URL = "tweet_image_url";
+    private static final String ARG_TWEET_IMAGE_URL = "ARG_TWEET_IMAGE_URL";
 
     public static PreviewZoomFragment newInstance(String tweetImageUrl) {
         PreviewZoomFragment fragment = new PreviewZoomFragment();
